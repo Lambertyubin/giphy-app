@@ -1,46 +1,66 @@
-# Getting Started with Create React App
+## How I worked on this App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+My goal was to build a Single Page React Application that leverages data from the Giphy API. The application should:
 
-## Available Scripts
+- Query the API and display gifs in a performance-minded fashion,
+- Display different Renditions of each Giphy when user clicks on it,
+- Provide a way for users to perform keyword searches against the API.
 
-In the project directory, you can run:
+### 1. Design
 
-### `npm start`
+Firstly, I designed the React application through the following steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **API Review:**: browsed to understand the endpoints and required parameters, as well as the structure of data returned by Giphy API.
+- **Mock UI:** sketched a simple UI that will display giphies and allow users to search the ones they like.
+- **React Components and Hierarchy:** did a breakdown of the UI into small components, and identified the hierarchies between the components. See hierarchy in attached image below:
+  ![giphy_app_tree](https://user-images.githubusercontent.com/51297126/172799624-cfe1e079-9ef4-4eaf-b2b4-9a9cfcdbd65f.jpg)
+- **Data Flow Management:** determined how data will flow in the app - which data should be state, and which should be props, and where each state should live. I also determined how data will flow from parent components to children.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 2. Development
 
-### `npm test`
+Secondly, I proceeded to implementation, with the following steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Unit Tests:** wrote unit tests for some components before developing them, following TDD approach. With more time I would cover more test cases.
+- **Static React App:** built the static version of the App using Material UI components to speed up the development process.
+- **Data Flow Implementation:** implemented data management (state, props) and its flow from one component to another. Here I used axios to query the API with in custom hook, and used the context API and props to move the data between components.
+- **Utilities:** implemented utility components for error-indicator, data-loading indicator, and pagination.
 
-### `npm run build`
+### 3. Performance Optimization
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+As the application queries many giphies from the API, I optimized the app performance through:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Lazy loading of giphies
+- Pagination
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Others Details
 
-### `npm run eject`
+Here are some choices I made and the reasons behind them.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **TypeScript:** to enforce static typing for the App, and eliminate type-related errors from surfacing at runtime.
+- **Material UI:** as a component library to speed up the development process.
+- **Axios:** to benefit from automatic transformation of JSON data, to keep the code cleaner (compared to built-in fetch)
+- **Jest:** to leverage its mocking functionality to facilitate unit testing.
+- **create-react-app:** to benefit from already configured webpack, babel, and basic code organization.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## What needs to be improved
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Increasing unit tests coverage
+- Improving App UI/UX
+- More refactoring to keep the code more clean and maintainable
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## How long it took me
 
-## Learn More
+I took me roughly 3 hours to design and build the app:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 45 mins for API review and Design
+- 2hrs + 15mins for implementation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to install and launch the App
+
+- Clone the app
+- Install dependencies
+  - `npm install`
+- Run App
+  - `npm run start`
+- In case you want to run tests:
+  - `npm run test`
